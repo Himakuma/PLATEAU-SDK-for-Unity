@@ -9,14 +9,6 @@ namespace PLATEAU
     {
         public new class UxmlFactory : UxmlFactory<SelectMapRangeElement> { }
 
-
-        private Dictionary<string, Vector2> defaultPointPositions = new Dictionary<string, Vector2>();
-
-
-
-        private float minSize = 20f;
-
-
         // TODO:borderの値が何故か取れないので、暫定で固定
         private float borderSize = 4f;
 
@@ -27,10 +19,10 @@ namespace PLATEAU
             styleSheets.Add(styleSheet);
             AddToClassList("range");
 
-            var leftTop = CreatePoint("range-point-left-top", false, false);
-            var leftBottom = CreatePoint("range-point-left-bottom", false, true);
-            var rightTop = CreatePoint("range-point-right-top", true, false);
-            var rightBottom = CreatePoint("range-point-right-bottom", true, true);
+            var leftTop = CreateRangePoint("range-point-left-top", false, false);
+            var leftBottom = CreateRangePoint("range-point-left-bottom", false, true);
+            var rightTop = CreateRangePoint("range-point-right-top", true, false);
+            var rightBottom = CreateRangePoint("range-point-right-bottom", true, true);
             this.AddManipulator(new FilterDragger(() =>
             {
                 return !(leftTop.IsMouseOver || leftBottom.IsMouseOver || rightTop.IsMouseOver || rightBottom.IsMouseOver);
@@ -38,12 +30,12 @@ namespace PLATEAU
         }
 
 
-        private MouseOverElement CreatePoint(string name, bool leftLock, bool topLock)
+        private MouseOverElement CreateRangePoint(string name, bool leftLock, bool topLock)
         {
             var point = new MouseOverElement();
             point.name = name;
             point.AddToClassList("range-point");
-            point.AddManipulator(new MoveDragger((e, target) => Resize(target, leftLock, topLock)));
+            point.AddManipulator(new MoveDragger((e, target) => MapRangeResize(target, leftLock, topLock)));
 
             Add(point);
             return point;
@@ -51,7 +43,7 @@ namespace PLATEAU
 
 
 
-        private void Resize(VisualElement target, bool leftLock = false, bool topLock = false)
+        private void MapRangeResize(VisualElement target, bool leftLock = false, bool topLock = false)
         {
             float targetLeft = target.style.left.value.value;
             float targetTop = target.style.top.value.value;

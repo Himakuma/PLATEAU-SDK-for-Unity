@@ -1,8 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <Style src="project://database/Packages/com.synesthesias.plateau-unity-sdk/Editor/EditorWindow/MapView/PlateauMapView.uss?fileID=7433441132597879392&amp;guid=b7f3d25694bbbe64eb32509346f63606&amp;type=3#PlateauMapView" />
-    <ui:VisualElement name="Main" style="max-width: none;">
-        <ui:VisualElement name="Map">
-            <PLATEAU.SelectMapRangeElement name="MapRange" style="width: 250px;" />
+    <ui:VisualElement name="Main" style="width: 100%; height: 100%; left: 0; top: 0; position: absolute;">
+        <ui:VisualElement name="Map" style="width: 100%; height: 100%; left: 0; top: 0; position: absolute;">
+            <PLATEAU.SelectMapRangeElement name="MapRange" style="width: 250px; transform-origin: center; height: 201px;" />
         </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement style="width: 100%; height: 100%; flex-direction: row-reverse; position: absolute;">
+        <ui:SliderInt picking-mode="Ignore" value="7" high-value="17" direction="Vertical" name="Scale" low-value="1" style="height: 50%; rotate: 180deg; top: 20px;" />
+        <ui:Label text="10" display-tooltip-when-elided="true" name="ScaleLabel" style="position: absolute; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; width: 20px; align-items: stretch; justify-content: flex-start; flex-wrap: nowrap; -unity-text-align: middle-center; -unity-font-style: bold;" />
     </ui:VisualElement>
 </ui:UXML>
